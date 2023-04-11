@@ -20,8 +20,8 @@ func main() {
 	)
 	defer tracer.Stop()
 
-	var logrusEntry = logrus.NewEntry(logrus.New())
-	var logrusOpts = []grpclogrus.Option{
+	logrusEntry := logrus.NewEntry(logrus.New())
+	logrusOpts := []grpclogrus.Option{
 		grpclogrus.WithDurationField(func(duration time.Duration) (key string, value interface{}) {
 			return "grpc.time_s", duration.Nanoseconds()
 		}),
