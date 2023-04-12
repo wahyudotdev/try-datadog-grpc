@@ -9,8 +9,8 @@ import (
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 	"log"
 	"net"
+	"server/services/hello"
 	"time"
-	"try-datadog-grpc/services/hello"
 )
 
 func main() {

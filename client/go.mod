@@ -1,10 +1,8 @@
-module try-datadog-grpc
+module client
 
 go 1.19
 
 require (
-	github.com/grpc-ecosystem/go-grpc-middleware v1.4.0
-	github.com/sirupsen/logrus v1.7.0
 	google.golang.org/grpc v1.54.0
 	google.golang.org/protobuf v1.30.0
 	gopkg.in/DataDog/dd-trace-go.v1 v1.49.1
