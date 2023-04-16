@@ -15,7 +15,7 @@ import (
 	"time"
 )
 
-func reqBodyInterceptor(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
+func gRPCBodyMiddleware(ctx context.Context, req interface{}, info *grpc.UnaryServerInfo, handler grpc.UnaryHandler) (resp interface{}, err error) {
 	span, _ := tracer.StartSpanFromContext(ctx, info.FullMethod, tracer.SpanType("grpc"),
 		tracer.ServiceName("grpc-server"),
 		tracer.ResourceName(info.FullMethod))
@@ -43,7 +43,7 @@ func main() {
 	server := grpc.NewServer(grpc.UnaryInterceptor(middleware.ChainUnaryServer(
 		dd,
 		grpclogrus.UnaryServerInterceptor(logrusEntry, logrusOpts...),
-		reqBodyInterceptor,
+		gRPCBodyMiddleware,
 	)))
 	l, err := net.Listen("tcp", ":3000")
 	if err != nil {
