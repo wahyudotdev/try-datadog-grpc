@@ -6,7 +6,6 @@ import (
 	grpclogrus "github.com/grpc-ecosystem/go-grpc-middleware/logging/logrus"
 	"github.com/sirupsen/logrus"
 	"google.golang.org/grpc"
-	"google.golang.org/grpc/reflection"
 	grpctrace "gopkg.in/DataDog/dd-trace-go.v1/contrib/google.golang.org/grpc"
 	"gopkg.in/DataDog/dd-trace-go.v1/ddtrace/tracer"
 	"log"
@@ -50,7 +49,6 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 	service := hello.NewHelloService()
-	reflection.Register(server)
 	hello.RegisterHelloServiceServer(server, service)
 	log.Println("grpc server started")
 	log.Fatal(server.Serve(l))
